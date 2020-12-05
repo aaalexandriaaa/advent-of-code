@@ -39,48 +39,54 @@ strArray.forEach((ele, idx) => {
     if (ele[posOne]==='#'){
         treesOne++
     }
-    if (posOne < 30) {
-        posOne++
-    } else {
-        posOne -=30
-    }
+    posOne=(posOne+1)%31
+    // if (posOne < 30) {
+    //     posOne++
+    // } else {
+    //     posOne -=30
+    // }
 
     if (ele[posThree]==='#'){
         treesThree++
     }
-    if (posThree < 28) {
-        posThree += 3
-    } else {
-        posThree -=28
-        }
+    posThree=(posThree+3)%31
+    // if (posThree < 28) {
+    //     posThree += 3
+    // } else {
+    //     posThree -=28
+    //     }
     
     if (ele[posFive]==='#'){
         treesFive++
     }
-    if (posFive < 26) {
-        posFive += 5
-    } else {
-        posFive -=26
-    }
+    posFive=(posFive+5)%31
+    // if (posFive < 26) {
+    //     posFive += 5
+    // } else {
+    //     posFive -=26
+    // }
 
     if (ele[posSeven]==='#'){
         treesSeven++
     }
-    if (posSeven < 24) {
-        posSeven += 7
-    } else {
-        posSeven -=24
-    }
+    // if (posSeven < 24) {
+    //     posSeven += 7
+    // } else {
+    //     posSeven -=24
+    // }
+    posSeven=(posSeven+7)%31
 
     if ((idx%2===0)&&(ele[posOther]==='#')){
-        console.log("TREE")
+        // console.log("TREE")
         treesOther++
     }
-    if ((idx%2===0) && (posOther < 30)) {
-        posOther++
-    } else if (idx%2===0){
-        posOther -=30
-    }
+    idx%2===0?posOther=(posOther+1)%31:posOther=posOther
+    
+    // if ((idx%2===0) && (posOther < 30)) {
+    //     posOther++
+    // } else if (idx%2===0){
+    //     posOther -=30
+    // }
 
 })
 
@@ -90,4 +96,12 @@ console.log("Five", treesFive)
 console.log("Seven", treesSeven)
 console.log("other", treesOther)
 
-console.log(treesOne*treesThree*treesFive*treesSeven*treesOther)
+console.log(treesOne * treesThree * treesFive * treesSeven * treesOther)
+
+
+// one 84
+// Three 198
+// Five 72
+// Seven 81
+// other 53
+// 5140884672
