@@ -1,37 +1,40 @@
 const fs = require('fs');
-let strArrayInput = fs.readFileSync('day04.txt', 'utf8').split('\n'); 
-let strArray = [];
-for (let i = 0; i < 11; i++){
-    strArray.push(strArrayInput[i])
-}
-console.log(strArray)
+let strArray = fs.readFileSync('day04.txt', 'utf8').split('\n'); 
+
+// this code is for easier debugging
+// let strArray = [];
+// for (let i = 0; i < 12; i++){
+//     strArray.push(strArrayInput[i])
+// }
+// console.log(strArray)
 
 let inputs = 0; // number of the 8 inputs present
 let passports = 0;  // number of passports that have 7 inputs (not including CID)
-let northPolian = false;
+let northPolian = true;
 strArray.forEach((ele, idx, arr) => {
-    // console.log(ele)
-    // console.log(passport)
-    // passport++
     if (!ele.length) {
-        console.log("LENGTH")
+        console.log("NEW LINE")
+        if (((northPolian) && (inputs === 7))||((!northPolian) && (inputs === 8))) {
+            passports++;
+        }
+        inputs = 0;
+        northPolian = true;
     } else {
-        console.log("NO LENGTH")
+        ele.search('byr')>-1 ? inputs++ : inputs
+        ele.search('iyr')>-1 ? inputs++ : inputs
+        ele.search('eyr')>-1 ? inputs++ : inputs
+        ele.search('hgt')>-1 ? inputs++ : inputs
+        ele.search('hcl')>-1 ? inputs++ : inputs
+        ele.search('ecl')>-1 ? inputs++ : inputs
+        ele.search('pid')>-1 ? inputs++ : inputs
+        if (ele.search('cid') > -1) {
+            inputs++
+            northPolian=false
+        }
+        console.log(inputs)
+        console.log("NORTH POLE?", northPolian)
     }
+    console.log("PPs",passports)
 })
+console.log("PPs",passports)
 
-// plan : go through each line
-// find the north pole passport phrase
-// also find the other 7 phrase
-// keep count of those phrases
-// and then add to the count
-
-// for each
-// if line is blank:
-// if northPolian === true &&  inputs === 7 - passports++
-// if northPolian === false && inputs === 8 - passports++
-// THEN reset inputs(set North Polian to true)
-// else: 
-// look for ('byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid', 'cid') and inputs++ when finding any of these inputs
-// if CID is present, northPolian should equal false. Otherwise, we assume north pole native
-// 
